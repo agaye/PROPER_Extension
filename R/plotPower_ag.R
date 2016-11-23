@@ -3,7 +3,7 @@
 # An amended version of the function 'plotPower' to allow for the plotting
 # of just one curve. The original function throws an 'xlim error' when using 
 # one sample size rather than two or more as set by he author. The plot was
-# also amended to line and dots along with other minor changes.
+# also amended to enable line and dots along with other minor changes.
 #
 
 plotPower_ag <- function (powerOutput, cols = 1:ncol(powerOutput$FD), lty = 1:ncol(powerOutput$power), 
@@ -17,6 +17,7 @@ plotPower_ag <- function (powerOutput, cols = 1:ncol(powerOutput$FD), lty = 1:nc
   power.se = power.se[!ix.na, ]
   strata = levels(cut(0, powerOutput$strata))
   strata = strata[!ix.na]
+
   plot(power, type = "b", lwd = 2, col = "red", lty = lty, 
           ylim = c(0, max(power, na.rm = TRUE)), xlim = c(0, length(power)+1),
           main = main, axes = FALSE, ylab = "", xlab="")
@@ -39,11 +40,12 @@ plotPower_ag <- function (powerOutput, cols = 1:ncol(powerOutput$FD), lty = 1:nc
   add.axis1 <- function (y, strata) 
   {
     tmp = axis(1, 1:length(strata), labels = FALSE)
-    ypos = -diff(range(y, na.rm = TRUE)) * 0.15
+    ypos = -diff(range(y, na.rm = TRUE)) * 0.10
     text(1:length(strata) - 0.1, ypos, strata, srt = 270 + 45, 
          xpd = TRUE, adj = c(0, 0))
   }
   add.axis1(power, strata)
   axis(2)
   box()
+
 }

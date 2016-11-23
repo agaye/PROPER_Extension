@@ -34,7 +34,7 @@ run.EBSeq <- function(dat){
   filter1 <- 1
   filter2 <- 0
   numiter <- 2
-  #cat("test\n")
+
   IsoEBOut <- EBTest(Data=IsoMat, NgVector=IsoNgTrun, 
                      Conditions=as.factor(status), 
                      sizeFactors=IsoSizes, maxround=numiter, Qtrm=filter1, QtrmCut=filter2)
@@ -46,8 +46,7 @@ run.EBSeq <- function(dat){
     lstEst <- length(IsoEBOut$Alpha)
     forlstEst <- length(IsoEBOut$Alpha)-1
     if(round(IsoEBOut$Alpha[lstEst], 6) == round(IsoEBOut$Alpha[lstEst], 6) & 
-         round(IsoEBOut$Beta[lstEst], 6) == round(IsoEBOut$Beta[lstEst], 6)){
-      message(paste0("hyper-parameter estimates converged after ", numiter, " iterations!"))
+      round(IsoEBOut$Beta[lstEst], 6) == round(IsoEBOut$Beta[lstEst], 6)){
       break
     }else{
       numiter <- numiter+1

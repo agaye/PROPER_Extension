@@ -14,7 +14,8 @@ plotFDR <- function (powerOutput, cols = 1:ncol(powerOutput$FDR),
   FDR = apply(FDR.all, c(1, 2), function(x) mean(x[is.finite(x)], 
                                                  na.rm = TRUE))
   FDR.se = apply(FDR.all, c(1, 2), function(x) sd(x[is.finite(x)], 
-                                                  na.rm = TRUE))/sqrt(dim(FDR.all)[3])
+                                           na.rm = TRUE))/sqrt(dim(FDR.all)[3])
+
   plot(FDR, type = "b", lwd = 2, col = "red", lty = lty, 
           ylim = c(0, max(FDR, na.rm = TRUE)), xlim = c(0, length(FDR)+1),
           main = main, axes = FALSE, ylab = "", xlab="")
@@ -37,11 +38,12 @@ plotFDR <- function (powerOutput, cols = 1:ncol(powerOutput$FDR),
   add.axis1 <- function (y, strata) 
   {
     tmp = axis(1, 1:length(strata), labels = FALSE)
-    ypos = -diff(range(y, na.rm = TRUE)) * 0.15
+    ypos = -diff(range(y, na.rm = TRUE)) * 0.40
     text(1:length(strata) - 0.1, ypos, strata, srt = 270 + 45, 
          xpd = TRUE, adj = c(0, 0))
   }
   add.axis1(FDR, strata)
   axis(2)
   box()
+
 }
